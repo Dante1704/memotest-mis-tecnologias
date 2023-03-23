@@ -1,21 +1,15 @@
-import getTechnologies from '../helpers/getTechnologies'
-import emoji from '../assets/emoji-confused.png'
 import { useEffect, useState } from 'react'
+import getTechnologies from '../helpers/getTechnologies'
+import { useGuessed } from '../hooks/useGuessed'
+import emoji from '../assets/emoji-confused.png'
 
 const technologies: string[] = getTechnologies()
 
 function Memotest (): JSX.Element {
   const [selected, setSelected] = useState<string[]>([])
-  const [guessed, setGuessed] = useState<string[]>([])
+  const [guessed, setGuessed] = useGuessed(selected)
 
-  useEffect(() => {
-    if (selected.length === 2) {
-      if (selected[0].split('|')[0] === selected[1].split('|')[0]) { // esto lo hago para que la comparacion sea igual
-        setGuessed((prev) => [...prev, ...selected])
-      }
-      setTimeout(() => { setSelected([]) }, 1000)
-    }
-  }, [selected])
+  selected.length === 2 && setTimeout(() => { setSelected([]) }, 1000)
 
   useEffect(() => {
     if (guessed.length === technologies.length) {

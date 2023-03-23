@@ -8,7 +8,6 @@ function App (): JSX.Element {
       <Route element={<Home/>} path={'/'}/>
       <Route element={<Memotest/>} path={'/memotest'}/>
     </Routes>
-
   )
 }
 
