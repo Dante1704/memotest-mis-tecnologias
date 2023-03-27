@@ -18,8 +18,8 @@ export const useGuessed = (selected: string[]): [string[], React.Dispatch<React.
   useEffect(() => {
     if (guessed.length === technologies.length) {
       alert('ganaste!')
-      setTimeout(() => { setGuessed([]) }, 1000)
     }
   }, [guessed])
+
   return [guessed, setGuessed]
 }

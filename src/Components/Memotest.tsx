@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import getTechnologies from '../helpers/getTechnologies'
+import getRandomTechnologies from '../helpers/getTechnologies'
 import { useGuessed } from '../hooks/useGuessed'
 import emoji from '../assets/emoji-confused.png'
 
-const technologies: string[] = getTechnologies()
+let technologies: string[] = getRandomTechnologies()
 
 function Memotest (): JSX.Element {
   const [selected, setSelected] = useState<string[]>([])
-  const [guessed] = useGuessed(selected)
+  const [guessed, setGuessed] = useGuessed(selected)
 
   selected.length === 2 && setTimeout(() => { setSelected([]) }, 1000)
 
@@ -16,11 +16,16 @@ function Memotest (): JSX.Element {
     if (selected.length < 2) setSelected((prev) => [...prev, tech])
   }
 
+  const handleReset = (): void => {
+    setGuessed([])
+    technologies = getRandomTechnologies()
+  }
+
   return (
-    <main className='h-[100vh] flex justify-center items-center'>
+    <main className='h-[100vh] flex flex-col justify-center items-center gap-10'>
       <ul className='grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 max-w-[1200px] gap-10'>
       { technologies.map((tech) => {
-        const url = tech.split('|')[0]
+        const url = tech.split('|')[0] // aca necesito la url sin el |a o |b sino no hay imagen
         return (
           <li key={tech} className="flex justify-center items-center min-w-14" onClick={() => { handleClick(tech) }}>
             { selected.includes(tech) || guessed.includes(tech)
@@ -31,6 +36,7 @@ function Memotest (): JSX.Element {
         )
       })}
       </ul>
+      <button onClick={handleReset}>Jugar de nuevo</button>
     </main>
   )
 }

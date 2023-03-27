@@ -13,8 +13,8 @@ const technologies: string[] = [
   'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg'
 ].flatMap(tech => [`${tech}|a`, `${tech}|b`]) // es una manera de devolver los elementos x2 aplanados para no repetir los mismos string
 
-const getTechnologies = (): string[] => {
-  return technologies
+const getRandomTechnologies = (): string[] => {
+  return technologies.sort((a, b) => Math.random() - 0.5) // si no tiene el -0.5, el valor aleatorio es siempre positivo y no genera nada aleatoriamente
 }
 
-export default getTechnologies
+export default getRandomTechnologies
