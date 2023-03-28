@@ -1,13 +1,15 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import getRandomTechnologies from '../helpers/getTechnologies'
 import { useGuessed } from '../hooks/useGuessed'
+
 import emoji from '../assets/emoji-confused.png'
 
 let technologies: string[] = getRandomTechnologies()
 
 function Memotest (): JSX.Element {
   const [selected, setSelected] = useState<string[]>([])
-  const [guessed, setGuessed] = useGuessed(selected)
+  const [guessed, setGuessed, mistakes, setMistake] = useGuessed(selected)
 
   selected.length === 2 && setTimeout(() => { setSelected([]) }, 1000)
 
@@ -18,6 +20,7 @@ function Memotest (): JSX.Element {
 
   const handleReset = (): void => {
     setGuessed([])
+    setMistake(0)
     technologies = getRandomTechnologies()
   }
 
@@ -36,7 +39,9 @@ function Memotest (): JSX.Element {
         )
       })}
       </ul>
+      <span>Mistakes: {mistakes}</span>
       <button onClick={handleReset}>Jugar de nuevo</button>
+      <Link to={'/scores'}>Ver Mejores Marcas</Link>
     </main>
   )
 }

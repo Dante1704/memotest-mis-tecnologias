@@ -11,9 +11,9 @@
 
 # scores
 
-[ ] renderizar la cantidad de errores cometidos a un costado del memotest
-[ ] cuando el jugador gana, capturar su nickname(string) y sus errores(num) para mostrar una tabla de scores.
-[ ] crear el componente de scores primero estatico y un link que se renderice en home y tambien en el memotest para poder visitar los scores desde ambas rutas
-[ ] funcionalidad de setear con firestore el nuevo record
+[x] renderizar la cantidad de errores cometidos a un costado del memotest
+[x] cuando el jugador gana, capturar su nickname(string) y sus errores(num) para mostrar una tabla de scores.
+[x] funcionalidad de setear con firestore el nuevo record
+[x] crear el componente de scores primero estatico y un link que se renderice en home y tambien en el memotest para poder visitar los scores desde ambas rutas
 [ ] funcionalidad de obtener todos los records
 [ ] modificar la tabla de scores estatica para poder renderizar los escores traidos de firestone
