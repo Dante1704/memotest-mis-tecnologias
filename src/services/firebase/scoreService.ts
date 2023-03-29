@@ -1,6 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { getFirestore, addDoc, collection, getDocs, query, orderBy } from 'firebase/firestore'
+import { getFirestore, addDoc, collection, getDocs, query, orderBy, type CollectionReference } from 'firebase/firestore'
+
+interface Score {
+  nickname: string
+  mistakes: number
+}
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -29,23 +34,19 @@ export async function createScore (nickname: string, mistakes: number): Promise<
   })
 }
 
-export function getAllscores (): Array<{
-  nickname: string
-  mistakes: number
-}> {
-  const scores = []
-  const q = query(collection(db, 'scores'), orderBy('mistakes'))
-  getDocs(q)
-    .then(
-      res => {
-        res.forEach((doc) => {
-          const score = doc.data()
-          scores.push(score)
-        })
-      }
-    )
-    .catch(error => { console.log(error) })
-  console.log(scores)
-
+export async function getAllscores (): Promise<Score[]> {
+  const scores: Score[] = []
+  const scoresRef = collection(db, 'scores') as CollectionReference<Score> // esta es la manera de convertir un dato que viene de firebase a un dato declrado por mi, este collectionReference debe ser importado como type de firebase
+  const q = query(scoresRef, orderBy('mistakes'))
+  try {
+    const response = await getDocs(q)
+    response.forEach((doc) => {
+      const score = doc.data()
+      scores.push(score)
+    })
+    console.log('datos traidos de firebase exitosamente')
+  } catch (error) {
+    console.log(error)
+  }
   return scores
 }

@@ -22,7 +22,6 @@ export const useGuessed = (selected: string[]): [string[], React.Dispatch<React.
     if (guessed.length === technologies.length) {
       alert('ganaste!')
       const nickname: string | null = prompt('escribe tu apodo para mostrarlo en la tabla de scores!')
-      console.log(nickname)
       nickname !== null && createScore(nickname, mistakes)
         .then(response => { alert('tu record fue guardado exitosamente!') })
         .catch(response => { alert('no pudimos guardar tu record, lo siento.') })

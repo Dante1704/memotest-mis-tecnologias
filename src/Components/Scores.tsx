@@ -1,39 +1,24 @@
+import { useState, useEffect } from 'react'
 import { getAllscores } from '../services/firebase/scoreService'
-const scores = [
-  {
-    nickname: 'chispas',
-    mistakes: 20
-  },
-  {
-    nickname: 'pelusa',
-    mistakes: 35
-  },
-  {
-    nickname: 'tornillo',
-    mistakes: 40
-  },
-  {
-    nickname: 'fideo',
-    mistakes: 52
-  },
-  {
-    nickname: 'zorro',
-    mistakes: 57
-  },
-  {
-    nickname: 'chiqui',
-    mistakes: 60
-  },
-  {
-    nickname: 'galleta',
-    mistakes: 65
-  }, {
-    nickname: 'caramelo',
-    mistakes: 25
-  }
-]
+
+interface Score {
+  nickname: string
+  mistakes: number
+}
+
+/* type Score = Array<{
+  nickname: string
+  mistakes: number
+}> */
 
 function Scores (): JSX.Element {
+  const [scores, setScores] = useState<Score[]>([])
+  useEffect(() => {
+    getAllscores()
+      .then(scores => { setScores(scores) })
+      .catch(error => { console.log(error) })
+  }, [])
+
   return (
         <div className="w-screen min-h-screen flex justify-center items-center">
             <table >
@@ -44,14 +29,18 @@ function Scores (): JSX.Element {
                     </tr>
                 </thead>
                 <tbody>
-                    {scores.map(({ nickname, mistakes }) => {
-                      return (
-                            <tr key={nickname}>
-                                <td>{nickname}</td>
-                                <td>{mistakes}</td>
+                    {(scores !== undefined)
+                      ? scores.map((score) => {
+                        return (
+                            <tr key={score.nickname}>
+                                <td>{score.nickname}</td>
+                                <td>{score.mistakes}</td>
                             </tr>
-                      )
-                    })}
+                        )
+                      })
+                      : <tr>
+                          <td>no hay scores</td>
+                        </tr>}
                 </tbody>
             </table>
         </div>
