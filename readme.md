@@ -17,4 +17,4 @@
 [x] crear el componente de scores primero estatico y un link que se renderice en home y tambien en el memotest para poder visitar los scores desde ambas rutas
 [x] funcionalidad de obtener todos los scores
 [x] modificar la tabla de scores estatica para poder renderizar los scores traidos de firestone
-[ ] evitar que se generen scores con el mismo usuario
+[x] evitar que se generen scores con el mismo usuario dejando el mejor score

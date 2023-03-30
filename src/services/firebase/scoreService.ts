@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { getFirestore, addDoc, collection, getDocs, query, orderBy, type CollectionReference } from 'firebase/firestore'
+import { getFirestore, doc, addDoc, setDoc, collection, getDocs, query, orderBy, where, type CollectionReference } from 'firebase/firestore'
 
 interface Score {
   nickname: string
@@ -28,10 +28,30 @@ const db = getFirestore(app)
 
 export async function createScore (nickname: string, mistakes: number): Promise<void> {
 // Add a new document in collection "scores"
-  await addDoc(collection(db, 'scores'), {
-    nickname,
-    mistakes
-  })
+  const scoresRef = collection(db, 'scores')
+  const q = query(scoresRef, where('nickname', '==', `${nickname}`))
+  try {
+    const response = await getDocs(q)
+    // console.log(response.docs[0].id) con este console.log() descubri como acceder al id del documento
+
+    // si ya hay un score y el nuevo es mejor, lo pisa
+    if (response.docs.length > 0 && (mistakes < response.docs[0].data().mistakes)) {
+      // console.log(response.docs[0].data().mistakes)
+      await setDoc(doc(db, 'scores', response.docs[0].id), { // aca si no le especifico el id me tira un error
+        nickname,
+        mistakes
+      })
+      alert(`Felicidades ${nickname} Estableciste un nuevo record!`)
+      return
+    }
+    // como no hay score previo, puedo crear uno nuevo
+    await addDoc(collection(db, 'scores'), {
+      nickname,
+      mistakes
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export async function getAllscores (): Promise<Score[]> {

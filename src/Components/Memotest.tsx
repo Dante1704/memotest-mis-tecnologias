@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import getRandomTechnologies from '../helpers/getTechnologies'
 import { useGuessed } from '../hooks/useGuessed'
-
 import emoji from '../assets/emoji-confused.png'
 
 let technologies: string[] = getRandomTechnologies()
