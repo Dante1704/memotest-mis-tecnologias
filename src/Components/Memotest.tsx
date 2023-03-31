@@ -24,7 +24,7 @@ function Memotest (): JSX.Element {
   }
 
   return (
-    <main className='h-[100vh] flex flex-col justify-center items-center gap-10'>
+    <main className='min-h-screen flex flex-col justify-center items-center gap-10'>
       <ul className='grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 max-w-[1200px] gap-10'>
       { technologies.map((tech) => {
         const url = tech.split('|')[0] // aca necesito la url sin el |a o |b sino no hay imagen
@@ -32,7 +32,7 @@ function Memotest (): JSX.Element {
           <li key={tech} className="flex justify-center items-center min-w-14" onClick={() => { handleClick(tech) }}>
             { selected.includes(tech) || guessed.includes(tech)
               ? <img src={url} className="w-12 h-12 sm:w-24 h-24"/> /* flip-card-front */
-              : <img src={emoji} className="w-12 h-12 sm:w-24 h-24"/> /* flip-card-front */
+              : <img src={emoji} className="w-12 h-12 sm:w-24 h-24 hover:scale-125 hover:invert"/> /* flip-card-front */
             }
           </li>
         )
