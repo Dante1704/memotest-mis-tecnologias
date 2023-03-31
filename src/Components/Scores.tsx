@@ -20,30 +20,38 @@ function Scores (): JSX.Element {
   }, [])
 
   return (
-        <div className="w-screen min-h-screen flex justify-center items-center">
-            <table >
-                <thead>
-                    <tr>
-                        <th>NICKNAME</th>
-                        <th>RESULTADO</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {(scores !== undefined)
-                      ? scores.map((score) => {
-                        return (
-                            <tr key={score.nickname}>
-                                <td>{score.nickname}</td>
-                                <td>{score.mistakes}</td>
-                            </tr>
-                        )
-                      })
-                      : <tr>
-                          <td>no hay scores</td>
-                        </tr>}
-                </tbody>
+    <>
+        <div className="flex justify-center items-center">
+          <div className="overflow-x-auto">
+            <table className="table ">
+              {/* head */}
+              <thead >
+                <tr >
+                  <th className="bg-neutral-focus text-center">#</th>
+                  <th className="bg-neutral-focus">Nickname</th>
+                  <th className="bg-neutral-focus text-center">Resultado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row 1 */}
+                {(scores !== undefined)
+                  ? scores.map((score, index) => {
+                    return (
+                      <tr key={score.nickname}>
+                        <th className="bg-neutral py-2 text-center"> {index + 1 } </th>
+                        <td className="bg-neutral py-2">{score.nickname}</td>
+                        <td className="bg-neutral py-2 text-center">{score.mistakes}</td>
+                      </tr>
+                    )
+                  })
+                  : <tr>
+                      <td>no hay scores</td>
+                    </tr>}
+              </tbody>
             </table>
-        </div>
+  </div>
+</div>
+</>
   )
 }
 
