@@ -64,7 +64,6 @@ export async function getAllscores (): Promise<Score[]> {
       const score = doc.data()
       scores.push(score)
     })
-    console.log('datos traidos de firebase exitosamente')
   } catch (error) {
     console.log(error)
   }

@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from 'react'
 import getTechnologies from '../helpers/getTechnologies'
+import getNickname from '../helpers/getNickname'
 import { createScore } from '../services/firebase/scoreService'
-import validator from 'validator'
 
 const technologies: string[] = getTechnologies()
 
 export const useGuessed = (selected: string[]): [string[], React.Dispatch<React.SetStateAction<string[]>>, number, React.Dispatch<React.SetStateAction<number>>] => {
   const [guessed, setGuessed] = useState<string[]>([])
   const [mistakes, setMistake] = useState(0)
+  const [nickname, setNickname] = useState<string>('')
 
   useEffect(() => {
     if (selected.length === 2) {
@@ -22,21 +23,23 @@ export const useGuessed = (selected: string[]): [string[], React.Dispatch<React.
 
   useEffect(() => {
     if (guessed.length === technologies.length) {
-      alert('ganaste!')
-      const nickname: string | null = prompt(
-        'escribe tu apodo (solo con letras) para mostrarlo en la tabla de scores!'
-      )
-      if (nickname !== null && (Boolean(validator.isAlphanumeric(nickname)))) {
-        const nick = nickname[0].toUpperCase() + nickname.substring(1)
-        createScore(nick, mistakes)
-          .then(response => {
-            alert('tu record fue guardado exitosamente!')
-            window.location.reload()
-          })
-          .catch(response => { alert('no pudimos guardar tu record, lo siento.') })
-      }
+      getNickname()
+        .then(nickname => { setNickname(nickname[0].toUpperCase() + nickname.substring(1)) })
+        .catch(error => { console.log(error) }
+        )
     }
   }, [guessed])
+
+  useEffect(() => {
+    if (nickname !== '') {
+      createScore(nickname, mistakes)
+        .then(response => {
+          alert('tu record fue guardado exitosamente!')
+          window.location.reload()
+        })
+        .catch(response => { alert('no pudimos guardar tu record, lo siento.') })
+    }
+  }, [nickname])
 
   return [guessed, setGuessed, mistakes, setMistake]
 }
