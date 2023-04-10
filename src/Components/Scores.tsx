@@ -13,8 +13,6 @@ interface Score {
 
 function Scores (): JSX.Element {
   const [scores, setScores] = useState<Score[]>([])
-  console.log(scores)
-
   useEffect(() => {
     getAllscores()
       .then(scores => { setScores(scores) })

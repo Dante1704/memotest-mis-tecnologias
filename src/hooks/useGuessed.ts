@@ -7,10 +7,9 @@ import validator from 'validator'
 
 const technologies: string[] = getTechnologies()
 
-export const useGuessed = (selected: string[]): [string[], React.Dispatch<React.SetStateAction<string[]>>, number, React.Dispatch<React.SetStateAction<number>>, boolean, React.Dispatch<React.SetStateAction<boolean>> ] => {
+export const useGuessed = (selected: string[]): [string[], React.Dispatch<React.SetStateAction<string[]>>, number, React.Dispatch<React.SetStateAction<number>>] => {
   const [guessed, setGuessed] = useState<string[]>([])
-  const [mistakes, setMistake] = useState<number>(0)
-  const [reloadScores, setReloadScores] = useState(false)
+  const [mistakes, setMistake] = useState(0)
 
   useEffect(() => {
     if (selected.length === 2) {
@@ -32,11 +31,12 @@ export const useGuessed = (selected: string[]): [string[], React.Dispatch<React.
         createScore(nick, mistakes)
           .then(response => {
             alert('tu record fue guardado exitosamente!')
+            window.location.reload()
           })
           .catch(response => { alert('no pudimos guardar tu record, lo siento.') })
       }
     }
   }, [guessed])
 
-  return [guessed, setGuessed, mistakes, setMistake, reloadScores, setReloadScores]
+  return [guessed, setGuessed, mistakes, setMistake]
 }

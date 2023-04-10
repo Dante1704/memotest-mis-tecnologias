@@ -8,7 +8,7 @@ let technologies: string[] = getRandomTechnologies()
 
 function Memotest (): JSX.Element {
   const [selected, setSelected] = useState<string[]>([])
-  const [guessed, setGuessed, mistakes, setMistake, reloadScores, setReloadScores] = useGuessed(selected)
+  const [guessed, setGuessed, mistakes, setMistake] = useGuessed(selected)
 
   selected.length === 2 && setTimeout(() => { setSelected([]) }, 1000)
 
