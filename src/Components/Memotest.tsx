@@ -12,7 +12,8 @@ function Memotest (): JSX.Element {
 
   selected.length === 2 && setTimeout(() => { setSelected([]) }, 1000)
 
-  const handleClick = (tech: string): void => { // cuando lo clickeo, que vaya a selected
+  const handleClick = (tech: string): void => {
+    // cuando lo clickeo, que vaya a selected
     // si es menor que 2 que agregue sino, no. Las comparaciones son de a 2
     if (selected.length < 2) setSelected((prev) => [...prev, tech])
   }

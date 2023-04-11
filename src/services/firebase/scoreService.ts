@@ -1,10 +1,15 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
 import { getFirestore, doc, addDoc, setDoc, collection, getDocs, query, orderBy, where, type CollectionReference } from 'firebase/firestore'
+import Swal from 'sweetalert2'
 
 interface Score {
   nickname: string
   mistakes: number
+}
+
+interface Message {
+  message: string
 }
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -26,7 +31,7 @@ export const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
-export async function createScore (nickname: string, mistakes: number): Promise<void> {
+export async function createScore (nickname: string, mistakes: number): Promise<Message> {
 // Add a new document in collection "scores"
   const scoresRef = collection(db, 'scores')
   const q = query(scoresRef, where('nickname', '==', `${nickname}`))
@@ -41,16 +46,25 @@ export async function createScore (nickname: string, mistakes: number): Promise<
         nickname,
         mistakes
       })
-      alert(`Felicidades ${nickname} Estableciste un nuevo record!`)
-      return
+      void Swal.fire({
+        title: 'Nuevo record personal',
+        text: `Felicidades ${nickname}, la rompiste!`,
+        timer: 1000
+      })
+      return { message: 'Nueva marca personal' }
     }
-    // como no hay score previo, puedo crear uno nuevo
-    await addDoc(collection(db, 'scores'), {
-      nickname,
-      mistakes
-    })
+    // si no hay score previo, puedo crear uno nuevo
+    if (response.docs.length === 0) {
+      await addDoc(collection(db, 'scores'), {
+        nickname,
+        mistakes
+      })
+      return { message: 'Score guardado exitosamente' }
+    }
+    return { message: 'Sigue practicando' }
   } catch (error) {
     console.log(error)
+    return { message: 'Lo siento, no pudimos guardar tu score' }
   }
 }
 

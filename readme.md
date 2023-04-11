@@ -19,4 +19,4 @@
 [x] modificar la tabla de scores estatica para poder renderizar los scores traidos de firestone
 [x] evitar que se generen scores con el mismo usuario dejando el mejor score
 
-[ ] estilado general con tailwind y daisyUI
+[x] estilado general con tailwind y daisyUI

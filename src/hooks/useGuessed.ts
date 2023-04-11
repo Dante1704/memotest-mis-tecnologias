@@ -1,9 +1,9 @@
 // custom hook para las tech adivinadas
-
 import { useEffect, useState } from 'react'
 import getTechnologies from '../helpers/getTechnologies'
 import getNickname from '../helpers/getNickname'
 import { createScore } from '../services/firebase/scoreService'
+import Swal from 'sweetalert2'
 
 const technologies: string[] = getTechnologies()
 
@@ -25,7 +25,16 @@ export const useGuessed = (selected: string[]): [string[], React.Dispatch<React.
     if (guessed.length === technologies.length) {
       getNickname()
         .then(nickname => { setNickname(nickname[0].toUpperCase() + nickname.substring(1)) })
-        .catch(error => { console.log(error) }
+        .catch(error => {
+          Swal.fire({
+            text: 'Lo siento, no pudimos guardar tu score',
+            icon: 'error',
+            timer: 2000
+          })
+            .then(() => { window.location.reload() })
+            .catch((error) => { console.log(error.message) })
+          console.log(error)
+        }
         )
     }
   }, [guessed])
@@ -34,10 +43,23 @@ export const useGuessed = (selected: string[]): [string[], React.Dispatch<React.
     if (nickname !== '') {
       createScore(nickname, mistakes)
         .then(response => {
-          alert('tu record fue guardado exitosamente!')
-          window.location.reload()
+          Swal.fire({
+            title: response.message,
+            icon: 'success',
+            timer: 2000
+          })
+            .then(() => { window.location.reload() })
+            .catch((error) => { console.log(error.message) })
         })
-        .catch(response => { alert('no pudimos guardar tu record, lo siento.') })
+        .catch(error => {
+          Swal.fire({
+            text: error.message,
+            icon: 'error',
+            timer: 1000
+          })
+            .then(() => { window.location.reload() })
+            .catch((error) => { console.log(error.message) })
+        })
     }
   }, [nickname])
 

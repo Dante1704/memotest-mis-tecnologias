@@ -21,8 +21,7 @@ function Scores (): JSX.Element {
 
   return (
     <>
-     <div className="flex justify-center items-center">
-        <div className="overflow-x-auto">
+        <div className="flex justify-center items-center overflow-x-auto">
           <table className="table ">
             {/* head */}
            <thead >
@@ -50,7 +49,6 @@ function Scores (): JSX.Element {
           </tbody>
         </table>
       </div>
-    </div>
   </>
   )
 }
