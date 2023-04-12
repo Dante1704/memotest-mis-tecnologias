@@ -14,7 +14,7 @@ const technologies: string[] = [
 ].flatMap(tech => [`${tech}|a`, `${tech}|b`]) // es una manera de devolver los elementos x2 aplanados para no repetir los mismos string
 
 const getRandomTechnologies = (): string[] => {
-  return technologies/* .sort((a, b) => Math.random() - 0.5)  */// si no tiene el -0.5, el valor aleatorio es siempre positivo y no genera nada aleatoriamente
+  return technologies.sort((a, b) => Math.random() - 0.5) // si no tiene el -0.5, el valor aleatorio es siempre positivo y no genera nada aleatoriamente
 }
 
 export default getRandomTechnologies

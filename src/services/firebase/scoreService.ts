@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
 import { getFirestore, doc, addDoc, setDoc, collection, getDocs, query, orderBy, where, type CollectionReference } from 'firebase/firestore'
-import Swal from 'sweetalert2'
 
 interface Score {
   nickname: string
@@ -46,12 +45,7 @@ export async function createScore (nickname: string, mistakes: number): Promise<
         nickname,
         mistakes
       })
-      void Swal.fire({
-        title: 'Nuevo record personal',
-        text: `Felicidades ${nickname}, la rompiste!`,
-        timer: 1000
-      })
-      return { message: 'Nueva marca personal' }
+      return { message: 'Nueva marca personal, la rompiste!' }
     }
     // si no hay score previo, puedo crear uno nuevo
     if (response.docs.length === 0) {
@@ -61,7 +55,7 @@ export async function createScore (nickname: string, mistakes: number): Promise<
       })
       return { message: 'Score guardado exitosamente' }
     }
-    return { message: 'Sigue practicando' }
+    return { message: 'Sigue practicando y rompe tu score!' }
   } catch (error) {
     console.log(error)
     return { message: 'Lo siento, no pudimos guardar tu score' }

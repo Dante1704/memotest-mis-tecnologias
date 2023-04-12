@@ -21,8 +21,8 @@ function Scores (): JSX.Element {
 
   return (
     <>
-        <div className="flex justify-center items-center overflow-x-auto">
-          <table className="table ">
+        <div className="flex justify-center items-center max-h-[616px] overflow-y-auto overflow-x-hidden pt-20">
+          <table className="table">
             {/* head */}
            <thead >
                <tr >
