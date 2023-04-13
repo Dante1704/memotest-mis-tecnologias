@@ -49,7 +49,7 @@ function Memotest (): JSX.Element {
       </div>
       <div className='flex flex-col justify-center items-center gap-16'>
         <ul
-        className='grid grid-cols-5 md:grid-cols-5 lg:grid-cols-6 max-w-[1200px] gap-10'
+        className='grid grid-cols-5 md:grid-cols-6 lg:grid-cols-6 max-w-[1200px] gap-10'
         >
           { technologies.map((tech) => {
             const url = tech.split('|')[0] // aca necesito la url sin el |a o |b sino no hay imagen
@@ -61,13 +61,13 @@ function Memotest (): JSX.Element {
                       src={url}
                       className={
                         url === 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg'
-                          ? 'invert w-24 h-24'
-                          : 'w-24 h-24'
+                          ? 'invert w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24'
+                          : 'w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24'
                         }/> // flip-card-front
                   : <img
                   src={emoji}
                   className={
-                    'w-10 h-10 invert-[.50] lg:hover:scale-125 lg:hover:invert cursor-pointer' /* */
+                    'w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 invert-[.50] lg:hover:scale-125 lg:hover:invert cursor-pointer' /* */
                   }/> // flip-card-front
                 }
               </li>
