@@ -37,3 +37,8 @@ body {
 main {
   padding:1rem;
 }
+
+.hover-invert {
+  filter: invert(1);
+  transform:scale(1.25)
+}

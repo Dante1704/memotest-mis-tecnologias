@@ -28,7 +28,16 @@ function Memotest (): JSX.Element {
     <main className='min-h-screen flex flex-col xl:flex-row justify-evenly items-center gap-10'>
       <div className='flex xl:flex-col items-center gap-2'>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" id="X" className='w-16 h-16'>
-          <path fill="none" fillRule="evenodd" stroke="#d85b53" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 1 1 13M1 1l12 12" className="colorStroke000000 svgStroke">
+          <path
+          fill="none"
+          fillRule="evenodd"
+          stroke="#d85b53"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M13 1 1 13M1 1l12 12"
+          className="colorStroke000000 svgStroke"
+          >
           </path>
         </svg>
         <span className='font-bold text-7xl'>
@@ -39,21 +48,37 @@ function Memotest (): JSX.Element {
         </span>
       </div>
       <div className='flex flex-col justify-center items-center gap-16'>
-        <ul className='grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 max-w-[1200px] gap-10'>
+        <ul
+        className='grid grid-cols-5 md:grid-cols-5 lg:grid-cols-6 max-w-[1200px] gap-10'
+        >
           { technologies.map((tech) => {
             const url = tech.split('|')[0] // aca necesito la url sin el |a o |b sino no hay imagen
             return (
               <li key={tech} className="flex justify-center items-center min-w-14"
                 onClick={() => { handleClick(tech) }}>
                 { selected.includes(tech) || guessed.includes(tech)
-                  ? <img src={url} className={url === 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg' ? 'invert w-24 h-24' : 'w-24 h-24'}/> // flip-card-front
-                  : <img src={emoji} className="w-24 h-24 invert-[.25] hover:scale-125 hover:invert"/> // flip-card-front
+                  ? <img
+                      src={url}
+                      className={
+                        url === 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg'
+                          ? 'invert w-24 h-24'
+                          : 'w-24 h-24'
+                        }/> // flip-card-front
+                  : <img
+                  src={emoji}
+                  className={
+                    'w-10 h-10 invert-[.50] lg:hover:scale-125 lg:hover:invert cursor-pointer' /* */
+                  }/> // flip-card-front
                 }
               </li>
             )
           })}
         </ul>
-        <button onClick={handleReset} className="btn btn-outline btn-accent w-[300px]">
+        <button
+        onClick={handleReset}
+        className={
+          'btn btn-outline btn-accent w-[300px]'
+        }>
           Jugar de nuevo
         </button>
       </div>

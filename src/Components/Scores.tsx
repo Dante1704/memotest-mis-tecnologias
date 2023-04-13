@@ -21,15 +21,15 @@ function Scores (): JSX.Element {
 
   return (
     <>
-        <div className="flex justify-center items-center max-h-[616px] overflow-y-auto overflow-x-hidden pt-20">
+        <div className="flex justify-center items-center max-h-[616px] overflow-y-auto overflow-x-hidden pt-44 rounded-xl">
           <table className="table">
             {/* head */}
            <thead >
-               <tr >
-               <th className="bg-neutral-focus text-center">#</th>
-               <th className="bg-neutral-focus">Nickname</th>
-               <th className="bg-neutral-focus text-center">Errores</th>
-                </tr>
+               <tr>
+                <th className="bg-neutral-focus text-center">#</th>
+                <th className="bg-neutral-focus">Nickname</th>
+                <th className="bg-neutral-focus text-center">Errores</th>
+               </tr>
            </thead>
            <tbody>
              {/* row 1 */}
