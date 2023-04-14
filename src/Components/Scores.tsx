@@ -26,7 +26,7 @@ function Scores (): JSX.Element {
             {/* head */}
             <li className="bg-neutral-focus p-4 flex gap-10">
               <span className="text-center min-w-[25px] font-bold">#</span>
-              <span className="min-w-[105px] font-bold text-center">
+              <span className="min-w-[150px] font-bold text-center">
                 NICKNAME</span>
               <span className="text-center font-bold min-w-[72px] flex justify-center items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" id="X" className='w-4 h-4'>
