@@ -26,7 +26,7 @@ function Memotest (): JSX.Element {
 
   return (
     <main className='min-h-screen flex flex-col xl:flex-row justify-evenly items-center gap-10'>
-      <div className='flex xl:flex-col items-center gap-2'>
+      <div className='flex xl:flex-col xl:min-w-[224px] items-center gap-2'>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" id="X" className='w-16 h-16'>
           <path
           fill="none"
