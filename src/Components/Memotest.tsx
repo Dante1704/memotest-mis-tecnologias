@@ -25,8 +25,8 @@ function Memotest (): JSX.Element {
   }
 
   return (
-    <main className='min-h-screen flex flex-col xl:flex-row justify-evenly items-center gap-10'>
-      <div className='flex xl:flex-col xl:min-w-[224px] items-center gap-2'>
+    <main className='min-h-screen flex flex-col 2xl:flex-row justify-evenly items-center gap-10'>
+      <div className='flex 2xl:flex-col 2xl:min-w-[224px] items-center gap-2'>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" id="X" className='w-16 h-16'>
           <path
           fill="none"
@@ -49,7 +49,7 @@ function Memotest (): JSX.Element {
       </div>
       <div className='flex flex-col justify-center items-center gap-16'>
         <ul
-        className='grid grid-cols-6 lg:grid-cols-6 max-w-[1200px] gap-10'
+        className='grid grid-cols-4 lg:grid-cols-6  max-w-[1200px] gap-10'
         >
           { technologies.map((tech) => {
             const url = tech.split('|')[0] // aca necesito la url sin el |a o |b sino no hay imagen
